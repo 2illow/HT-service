@@ -2,7 +2,7 @@
 
 # CREATE
 * Create a new house info for a houseid
-
+```sh
 /houses/:houseid (POST)
 response: N/A
 request.body: 
@@ -18,9 +18,10 @@ request.body:
   price,
   status
 }
+```
 
 * Add photos to a house with specific houseid
-
+```sh
 /image/:houseid (POST)
 response: N/A
 request.body:
@@ -29,10 +30,11 @@ request.body:
   image_url,
   house_id
 }
+```
 
 # READ
 * Get a house info with a specific houseid
-
+```sh
 /houses/:houseid (GET)
 response:
 {
@@ -47,9 +49,10 @@ response:
   price,
   status
 }
+```
 
 * Get photoes for a house with a specific houseid
-
+```sh
 /image/:houseid (GET)
 response:
 {
@@ -57,33 +60,37 @@ response:
   image_url,
   house_id
 }
-
+```
 
 # UPDATE
 * Update house info with a specific houseid
-
+```sh
 /houses/:houseId (PUT)
 response: none
+```
 
 * Update photoes with a specific houseid
-
+```sh
 /image/:houseid
 response: none
+```
 
 # DELETE
 * Delete a house info with a specific houseid
-
+```sh
 houses/:houseid
 response: none
+```
 
 * Delete photoes with a specific houseid
-
+```sh
 /image/:houseid
 response: none
+```
 
 # Schema
 ## SQL
-
+```sh
 DROP DATABASE IF EXISTS houses;
  
 CREATE DATABASE houses;
@@ -126,10 +133,10 @@ CREATE TABLE save_home (
   FOREIGN KEY (house_id) REFERENCES house (house_id),
   FOREIGN KEY (user_id) REFERENCES user (user_id)
 );
-
+```
 
 ## No SQL
-
+```sh
 {
   id: { type: Number, required: true, unique: true },
   address: { type: String, required: true, unique: true },
@@ -144,5 +151,4 @@ CREATE TABLE save_home (
   images: [{ type: String }],
   user: String
 }
-
-
+```
