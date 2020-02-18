@@ -2,6 +2,7 @@
 
 # CREATE
 * Create a new house info for a houseid
+
 /houses/:houseid (POST)
 response: N/A
 request.body: 
@@ -19,6 +20,7 @@ request.body:
 }
 
 * Add photos to a house with specific houseid
+
 /image/:houseid (POST)
 response: N/A
 request.body:
@@ -30,6 +32,7 @@ request.body:
 
 # READ
 * Get a house info with a specific houseid
+
 /houses/:houseid (GET)
 response:
 {
@@ -46,6 +49,7 @@ response:
 }
 
 * Get photoes for a house with a specific houseid
+
 /image/:houseid (GET)
 response:
 {
@@ -57,24 +61,29 @@ response:
 
 # UPDATE
 * Update house info with a specific houseid
+
 /houses/:houseId (PUT)
 response: none
 
 * Update photoes with a specific houseid
+
 /image/:houseid
 response: none
 
 # DELETE
 * Delete a house info with a specific houseid
+
 houses/:houseid
 response: none
 
 * Delete photoes with a specific houseid
+
 /image/:houseid
 response: none
 
 # Schema
 ## SQL
+
 DROP DATABASE IF EXISTS houses;
  
 CREATE DATABASE houses;
@@ -120,6 +129,7 @@ CREATE TABLE save_home (
 
 
 ## No SQL
+
 {
   id: { type: Number, required: true, unique: true },
   address: { type: String, required: true, unique: true },
