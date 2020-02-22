@@ -3,11 +3,10 @@
 # CREATE
 * Create a new house info for a houseid
 ```sh
-/houses/:houseid (POST)
+/houses (POST)
 response: N/A
 request.body: 
 {
-  house_id,
   address,
   city,
   state,
@@ -20,13 +19,12 @@ request.body:
 }
 ```
 
-* Add photos to a house with specific houseid
+* Add a photo to a house with specific houseid
 ```sh
-/image/:houseid (POST)
+/houses/:houseid/image (POST)
 response: N/A
 request.body:
 {
-  id,
   image_url,
   house_id
 }
@@ -53,7 +51,7 @@ response:
 
 * Get photoes for a house with a specific houseid
 ```sh
-/image/:houseid (GET)
+/house/:houseid/image (GET)
 response:
 {
   id,
@@ -63,16 +61,21 @@ response:
 ```
 
 # UPDATE
-* Update house info with a specific houseid
+* Update house info (address, city, state, zipcode etc...) with a specific houseid
 ```sh
-/houses/:houseId (PUT)
+/houses/:houseId/(any field above) (PUT)
 response: none
 ```
 
-* Update photoes with a specific houseid
+* Update all photoes with a specific houseid
 ```sh
-/image/:houseid
+/houses/:houseid/image/
 response: none
+```
+
+* Update a photo with a specific houseid
+```sh
+/houses/:houseId/image/:id
 ```
 
 # DELETE
@@ -82,9 +85,15 @@ houses/:houseid
 response: none
 ```
 
-* Delete photoes with a specific houseid
+* Delete all photoes with a specific houseid
 ```sh
-/image/:houseid
+/house/:houseid/image
+response: none
+```
+
+* Delete a photo with a specific houseid
+```sh
+/house/:houseid/image/:id
 response: none
 ```
 
@@ -108,7 +117,7 @@ CREATE TABLE house (
    area INT NOT NULL,
    price INT NOT NULL,
    status VARCHAR(20) NOT NULL,
-   PRIMARY KEY (house_id), 
+   PRIMARY KEY (house_id)
 );
 
 CREATE TABLE image (
@@ -123,13 +132,14 @@ CREATE TABLE image (
 CREATE TABLE user (
   user_id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(20) NOT NULL,
-  PRIMARY KEY (id),
+  PRIMARY KEY (user_id)
 );
 
 CREATE TABLE save_home (
   id INT NOT NULL AUTO_INCREMENT,
   house_id INT NOT NULL,
   user_id INT NOT NULL,
+  PRIMARY KEY (id),
   FOREIGN KEY (house_id) REFERENCES house (house_id),
   FOREIGN KEY (user_id) REFERENCES user (user_id)
 );
@@ -149,6 +159,7 @@ CREATE TABLE save_home (
   price: Number,
   status: String,
   images: [{ type: String }],
-  user: String
+  user: String,
+  saveHome: Boolean
 }
 ```

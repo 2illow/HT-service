@@ -12,6 +12,6 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/houses', retrieve);
+app.get('/houses/:houseid', retrieve);
 
 app.listen(PORT, () => console.log('Listening on port: ' + PORT));
