@@ -5,7 +5,8 @@ const writeHouses = fs.createWriteStream('./csv/house.csv');
 writeHouses.write('house_id,address,city,state,zipcode,beds,baths,area,price,status\n', 'utf8');
 
 function writeTenMillionHouses(writer, encoding, callback) {
-  let i = 10000000;
+  // 2 million records for house table
+  let i = 2000000;
   let id = 0;
   function write() {
     let ok = true;

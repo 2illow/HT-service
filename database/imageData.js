@@ -27,7 +27,7 @@ const writeImages = fs.createWriteStream('./csv/image.csv');
 writeImages.write('id,image_url,house_id\n', 'utf8');
 
 function writeSixtyMillionImages(writer, encoding, callback) {
-  let i = 60000000;
+  let i = 10000000;
   let index = 0;
   function write() {
     let ok = true;
@@ -36,7 +36,7 @@ function writeSixtyMillionImages(writer, encoding, callback) {
       index += 1;
       const id = index;
       const image_url = images[Math.floor(Math.random() * 20)];
-      const house_id = Math.floor(Math.random() * 10000000) + 1;
+      const house_id = Math.floor(Math.random() * 2000000) + 1;
       const data = `${id},${image_url},${house_id}\n`;
       if (i === 0) {
         writer.write(data, encoding, callback);

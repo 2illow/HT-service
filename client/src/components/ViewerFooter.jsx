@@ -10,10 +10,8 @@ top: 95%;
 text-align: center;
 `;
 
-function ViewerFooter(props) {
-  return (
-    <Foot>For Sale: {props.des}</Foot>
-  );
-}
+const ViewerFooter = ({ status, price, beds, baths, area }) => (
+  <Foot>{`${status}: $${price} (${beds} beds, ${baths} baths, ${area} sqft)`}</Foot>
+);
 
 export default ViewerFooter;

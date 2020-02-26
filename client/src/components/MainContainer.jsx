@@ -35,15 +35,25 @@ class MainContainer extends Component {
     super(props);
     this.state = {
       images: ['https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif'],
-      id: 0,
-      address: '',
-      description: '',
-      popout: false,
-      selectedPic: '',
+      status: '',
+      price: '',
+      beds: '',
+      baths: '',
+      area: '',
       imageCount: 1,
+      selectedPic: '',
+      id: 0,
+      popout: false,
       saved: false,
+      // id: 0,
+      // address: '',
+      // description: '',
+      // popout: false,
+      // selectedPic: '',
+      // imageCount: 1,
+      // saved: false,
     };
-    this.retrieveImages = this.retrieveImages.bind(this);
+    // this.retrieveImages = this.retrieveImages.bind(this);
     this.viewerPopout = this.viewerPopout.bind(this);
     this.imageClick = this.imageClick.bind(this);
     this.closePopout = this.closePopout.bind(this);
@@ -52,10 +62,11 @@ class MainContainer extends Component {
     this.restartGallery = this.restartGallery.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.saveHouse = this.saveHouse.bind(this);
+    this.retrieveHouse = this.retrieveHouse.bind(this);
   }
 
   componentDidMount() {
-    this.retrieveImages();
+    this.retrieveHouse();
   }
 
   restartGallery() {
@@ -105,23 +116,53 @@ class MainContainer extends Component {
     this.setState({ selectedPic: parseInt(event.target.id) });
   }
 
-  retrieveImages() {
-    axios.get('/houses')
+  retrieveHouse() {
+    axios.get(`/houses/${id}`)
       .then((response) => {
-        const house = response.data[0];
-        console.log(house);
+        const house = response.data;
         this.setState({
-          images: house.images,
-          description: house.description,
-          id: house.id,
-          address: house.address,
-          imageCount: house.images.length,
+          id: house.house_id,
+          status: house.status,
+          price: house.price,
+          beds: house.beds,
+          baths: house.baths,
+          area: house.area,
         });
+        axios.get(`/house/${id}/image`)
+          .then((response) => {
+            const image = response.data;
+            console.log(image);
+            this.setState({
+              images: image.image_url,
+              imageCount: image.image_url.length,
+            });
+          })
+          .catch((error) => {
+            throw error;
+          });
       })
       .catch((error) => {
         throw error;
       });
   }
+
+  // retrieveImages() {
+  //   axios.get(`/house/${id}/image`)
+  //     .then((response) => {
+  //       const house = response.data;
+  //       console.log(house);
+  //       this.setState({
+  //         images: house.images,
+  //         description: house.description,
+  //         id: house.id,
+  //         address: house.address,
+  //         imageCount: house.images.length,
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       throw error;
+  //     });
+  // }
 
   render() {
     return (

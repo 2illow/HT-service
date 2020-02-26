@@ -1,14 +1,5 @@
-const mysql = require('mysql');
+const connection = require('../dbConfig.js');
 
-// connection credential
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'houses',
-});
-
-// connect to mysql with credential above
 connection.connect((err) => {
   if (err) {
     return err;

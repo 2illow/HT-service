@@ -4,7 +4,7 @@ const writeSaveHomes = fs.createWriteStream('./csv/saveHome.csv');
 writeSaveHomes.write('id,house_id,user_id\n', 'utf8');
 
 function writeTwoMillionSaveHomes(writer, encoding, callback) {
-  let i = 20000000;
+  let i = 2000000;
   let index = 0;
   function write() {
     let ok = true;
@@ -12,8 +12,8 @@ function writeTwoMillionSaveHomes(writer, encoding, callback) {
       i -= 1;
       index += 1;
       const id = index;
-      const house_id = Math.floor(Math.random() * 10000000) + 1;
-      const user_id = Math.floor(Math.random() * 10000000) + 1;
+      const house_id = Math.floor(Math.random() * 2000000) + 1;
+      const user_id = Math.floor(Math.random() * 1000000) + 1;
       const data = `${id},${house_id},${user_id}\n`;
       if (i === 0) {
         writer.write(data, encoding, callback);
